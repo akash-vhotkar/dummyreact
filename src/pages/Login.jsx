@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Logo from "../assets/logo.png";
-import PermIdentityIcon from "@material-ui/icons/PermIdentity";
-import VpnKeyIcon from "@material-ui/icons/VpnKey";
-import Button from "@material-ui/core/Button";
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
 import { login } from "../store/action/auth.action";
 import { Link, useHistory } from "react-router-dom";
+import { CLEAR_LOGIN_ERRORS } from "../store/constant";
+import HolyPennies from '../assets/images/HolyPennies-Logo.png';
 
 function Login(props) {
   const dispatch = useDispatch();
@@ -48,59 +46,79 @@ function Login(props) {
     } else {
       dispatch(login(data));
     }
+    dispatch({ type: CLEAR_LOGIN_ERRORS, payload: [] });
+
   };
 
   return (
     <>
-      <section id="login-page">
-        <div className="login-card">
-        <h1>Admin Login here</h1>
-          <form onSubmit={onSubmit}>
-            <div className="form-group">
-              <label className="input-label" htmlFor="InputEmail">
-                Email address<span>*</span>
-              </label>
-              <div className="input-field">
-                <div className="icon">
-                  <PermIdentityIcon />
+      <div class="container-scroller">
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+          <div class="content-wrapper d-flex align-items-center auth px-0">
+            <div class="row w-100 mx-0">
+              <div class="col-lg-4 mx-auto">
+                <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                  <div class="brand-logo">
+                    <img src={HolyPennies} alt="logo" />
+                  </div>
+                  <h4>Hello! let's get started</h4>
+                  <h6 class="font-weight-light">Sign in to continue.</h6>
+                  <form onSubmit={onSubmit} class="pt-3">
+                    <div class="form-group">
+                      <input
+                        type="email"
+                        name="email"
+                        value={data.email}
+                        onChange={InputEvent}
+                        class="form-control form-control-lg"
+                        id="exampleInputEmail1"
+                        placeholder="Username"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <input
+                        type="password"
+                        name="password"
+                        value={data.password}
+                        onChange={InputEvent}
+                        class="form-control form-control-lg"
+                        id="exampleInputPassword1"
+                        placeholder="Password"
+                      />
+                    </div>
+                    <button class="
+                        btn btn-block btn-primary btn-lg
+                        font-weight-medium
+                        auth-form-btn
+                      " type="submit">
+                      Sign in
+                    </button>
+                    <div
+                      class="
+                      my-2
+                      d-flex
+                      justify-content-between
+                      align-items-center
+                    "
+                    >
+                      <div class="form-check">
+                        <label class="form-check-label text-muted">
+                          <input type="checkbox" class="form-check-input" />
+                          Keep me signed in
+                        </label>
+                      </div>
+                      <a href="#" class="auth-link text-black"
+                      >Forgot password?</a
+                      >
+                    </div>
+
+                  </form>
                 </div>
-                <input
-                  type="email"
-                  name="email"
-                  value={data.email}
-                  onChange={InputEvent}
-                  className="form-control"
-                  id="InputEmail"
-                  required
-                />
               </div>
             </div>
-            <div className="form-group">
-              <label className="input-label" htmlFor="InputPassword">
-                Password<span>*</span>
-              </label>
-              <div className="input-field">
-                <div className="icon">
-                  <VpnKeyIcon />
-                </div>
-                <input
-                  type="password"
-                  name="password"
-                  value={data.password}
-                  onChange={InputEvent}
-                  className="form-control"
-                  id="InputPassword"
-                  required
-                />
-              </div>
-            </div>
-            <Button type="submit" className="btn-submit">
-              Submit
-            </Button>
-          </form>
-          <Link to="/register" className="page-title">Registration</Link>
+          </div>
         </div>
-      </section>
+      </div>
     </>
   );
 }

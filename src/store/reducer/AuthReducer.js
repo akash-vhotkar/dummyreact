@@ -1,6 +1,6 @@
 import jwt_decode from 'jwt-decode';
 import { getToken } from '../../config/action'
-import { LOGIN_ERRORS, LOG_OUT, SET_TOKEN } from '../constant';
+import { LOGIN_ERRORS, LOG_OUT, SET_TOKEN,CLEAR_LOGIN_ERRORS } from '../constant';
 
 const initState = {
     token: null,
@@ -46,6 +46,8 @@ const AuthReducer = (state = initState, action) => {
             return { ...state, token: payload }
         case LOGIN_ERRORS:
             return { ...state, loginerror: payload };
+        case CLEAR_LOGIN_ERRORS:
+            return { ...state, loginerror: "" };
         case LOG_OUT:
             return { ...state, user: '', token: '' }
         default:
