@@ -3,5 +3,6 @@ export const LOG_OUT = 'LOG_OUT';
 export const LOGIN_ERRORS = 'LOGIN_ERRORS';
 export const CLEAR_LOGIN_ERRORS = 'CLEAR_LOGIN_ERRORS';
 
+export const SWITCH_NAV = 'SWITCH_NAV';
 
 
