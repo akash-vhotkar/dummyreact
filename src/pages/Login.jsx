@@ -18,12 +18,15 @@ function Login(props) {
   const { loginerror, token } = useSelector(state => state.auth)
 
   useEffect(() => {
-    if (loginerror.loginerror !== "") {
-      toast.error(loginerror.message);
-    }
+    if (loginerror.length > 0) {
+      loginerror.map(loginer => {
+        toast.error(loginer.message);
+        dispatch({ type: CLEAR_LOGIN_ERRORS, payload: [] });
+      })
+    };
     if (token) {
-      // window.location.href = "/dashboard";
-      history.push('/dashboard');
+      window.location.href = "/dashboard";
+      // history.push('/dashboard');
     }
     // eslint-disable-next-line
   }, [loginerror, token]);
@@ -52,41 +55,41 @@ function Login(props) {
 
   return (
     <>
-      <div class="container-scroller">
-        <div class="container-fluid page-body-wrapper full-page-wrapper">
-          <div class="content-wrapper d-flex align-items-center auth px-0">
-            <div class="row w-100 mx-0">
-              <div class="col-lg-4 mx-auto">
-                <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-                  <div class="brand-logo">
+      <div className="container-scroller">
+        <div className="container-fluid page-body-wrapper full-page-wrapper">
+          <div className="content-wrapper d-flex align-items-center auth px-0">
+            <div className="row w-100 mx-0">
+              <div className="col-lg-4 mx-auto">
+                <div className="auth-form-light text-left py-5 px-4 px-sm-5">
+                  <div className="brand-logo">
                     <img src={HolyPennies} alt="logo" />
                   </div>
                   <h4>Hello! let's get started</h4>
-                  <h6 class="font-weight-light">Sign in to continue.</h6>
-                  <form onSubmit={onSubmit} class="pt-3">
-                    <div class="form-group">
+                  <h6 className="font-weight-light">Sign in to continue.</h6>
+                  <form onSubmit={onSubmit} className="pt-3">
+                    <div className="form-group">
                       <input
                         type="email"
                         name="email"
                         value={data.email}
                         onChange={InputEvent}
-                        class="form-control form-control-lg"
+                        className="form-control form-control-lg"
                         id="exampleInputEmail1"
-                        placeholder="Username"
+                        placeholder="Email"
                       />
                     </div>
-                    <div class="form-group">
+                    <div className="form-group">
                       <input
                         type="password"
                         name="password"
                         value={data.password}
                         onChange={InputEvent}
-                        class="form-control form-control-lg"
+                        className="form-control form-control-lg"
                         id="exampleInputPassword1"
                         placeholder="Password"
                       />
                     </div>
-                    <button class="
+                    <button className="
                         btn btn-block btn-primary btn-lg
                         font-weight-medium
                         auth-form-btn
@@ -94,20 +97,20 @@ function Login(props) {
                       Sign in
                     </button>
                     <div
-                      class="
+                      className="
                       my-2
                       d-flex
                       justify-content-between
                       align-items-center
                     "
                     >
-                      <div class="form-check">
-                        <label class="form-check-label text-muted">
-                          <input type="checkbox" class="form-check-input" />
+                      <div className="form-check">
+                        <label className="form-check-label text-muted">
+                          <input type="checkbox" className="form-check-input" />
                           Keep me signed in
                         </label>
                       </div>
-                      <a href="#" class="auth-link text-black"
+                      <a href="#" className="auth-link text-black"
                       >Forgot password?</a
                       >
                     </div>

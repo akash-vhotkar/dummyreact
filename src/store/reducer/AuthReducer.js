@@ -29,6 +29,7 @@ let token = getToken();
 const setToken = (token)=>{
     if (token) {
         const decodetoken = verifytoken(token);
+        console.log(decodetoken);
         if (decodetoken) {
             initState.token = token;
             initState.user = decodetoken;

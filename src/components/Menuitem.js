@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+// import { Camera } from 'react-feather';
 
 export default function Menuitem({ data, subMenu }) {
     const [Expend, setExpend] = useState(false);
@@ -18,14 +19,14 @@ export default function Menuitem({ data, subMenu }) {
                             <ul className="nav flex-column sub-menu">
                                 {
                                     subMenu.map((ele, ind) => (
-                                        <li key={ind} className="nav-item"><Link className="nav-link" to={ele.to}>{ele.name}</Link></li>
+                                        <li key={ind} className="nav-item"><Link onClick={data.onClick} className="nav-link" to={ele.to}>{ele.name}</Link></li>
                                     ))
                                 }
                             </ul>
                         </div>
                     </li>
                 ) : (
-                    <NavLink activeClassName="active" to={data.to} className="nav-item">
+                    <NavLink activeClassName="active" to={data.to} onClick={data.onClick} className="nav-item">
                         <a className="nav-link">
                             <i className={data.icon} />
                             <span className="menu-title">{data.name}</span>
