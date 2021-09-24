@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Layout from '../container/Layout'
+import Table from '../container/Table';
 import face from '../assets/images/face1.jpg';
-
+import { useDispatch } from 'react-redux';
+import { ViewHow } from '../store/action/hollyhouse.action';
+import moment from 'moment';
 
 export default function Viewhow() {
+    const [Data, setData] = useState([]);
+    const dispatch = useDispatch();
+
+    useEffect(async () => {
+        const data = await dispatch(ViewHow());
+        console.log(data);
+        setData(data);
+    }, [])
+
     return (
         <React.Fragment>
             <Layout>
@@ -12,129 +24,67 @@ export default function Viewhow() {
                         <div className="col-lg-12 grid-margin stretch-card">
                             <div className="card">
                                 <div className="card-body">
-                                    <h4 className="card-title">Org Sample Table list </h4>
+                                    <h4 className="card-title">View Organization list </h4>
+                                    <Table>
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Organization Logo
+                                                </th>
+                                                <th>
+                                                    Organization name
+                                                </th>
 
-                                    <div className="table-responsive">
-                                        <table className="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        User
-                                                    </th>
-                                                    <th>
-                                                        First name
-                                                    </th>
-                                                    <th>
-                                                        Progress
-                                                    </th>
-                                                    <th>
-                                                        Amount
-                                                    </th>
-                                                    <th>
-                                                        Deadline
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td className="py-1">
-                                                        <img src={face} alt="image" />
-                                                    </td>
-                                                    <td>
-                                                        Herman Beck
-                                                    </td>
-                                                    <td>
-                                                        <div className="progress">
-                                                            <div className="progress-bar bg-success" role="progressbar" style={{ width: '25%' }} aria-valuenow={25} aria-valuemin={0} aria-valuemax={100} />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        $ 77.99
-                                                    </td>
-                                                    <td>
-                                                        May 15, 2015
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td className="py-1">
-                                                        <img src={face} alt="image" />
-                                                    </td>
-                                                    <td>
-                                                        Messsy Adam
-                                                    </td>
-                                                    <td>
-                                                        <div className="progress">
-                                                            <div className="progress-bar bg-danger" role="progressbar" style={{ width: '75%' }} aria-valuenow={75} aria-valuemin={0} aria-valuemax={100} />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        $245.30
-                                                    </td>
-                                                    <td>
-                                                        July 1, 2015
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td className="py-1">
-                                                        <img src={face} alt="image" />
-                                                    </td>
-                                                    <td>
-                                                        John Richards
-                                                    </td>
-                                                    <td>
-                                                        <div className="progress">
-                                                            <div className="progress-bar bg-warning" role="progressbar" style={{ width: '90%' }} aria-valuenow={90} aria-valuemin={0} aria-valuemax={100} />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        $138.00
-                                                    </td>
-                                                    <td>
-                                                        Apr 12, 2015
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td className="py-1">
-                                                        <img src={face} alt="image" />
-                                                    </td>
-                                                    <td>
-                                                        Peter Meggik
-                                                    </td>
-                                                    <td>
-                                                        <div className="progress">
-                                                            <div className="progress-bar bg-primary" role="progressbar" style={{ width: '50%' }} aria-valuenow={50} aria-valuemin={0} aria-valuemax={100} />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        $ 77.99
-                                                    </td>
-                                                    <td>
-                                                        May 15, 2015
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td className="py-1">
-                                                        <img src={face} alt="image" />
-                                                    </td>
-                                                    <td>
-                                                        Edward
-                                                    </td>
-                                                    <td>
-                                                        <div className="progress">
-                                                            <div className="progress-bar bg-danger" role="progressbar" style={{ width: '35%' }} aria-valuenow={35} aria-valuemin={0} aria-valuemax={100} />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        $ 160.25
-                                                    </td>
-                                                    <td>
-                                                        May 03, 2015
-                                                    </td>
-                                                </tr>
+                                                <th>
+                                                    Organization Email
+                                                </th>
+                                                <th>
+                                                    Account Status
+                                                </th>
+                                                <th>
+                                                    Amount Approved
+                                                </th>
+                                                <th>
+                                                    Opening date
+                                                </th>
+                                                <th>
+                                                    Action
+                                                </th>
 
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                Data && Data.length > 0 && Data.map(ele => (
+                                                    <tr>
+                                                        <td className="py-1">
+                                                            <img src={face} alt="ini" />
+                                                        </td>
+                                                        <td>
+                                                            {ele.org_name}
+                                                        </td>
+                                                        <td>
+                                                            {ele.admin_email}
+                                                        </td>
+                                                        <td>
+                                                            {ele.isactive ? "Active" : "Deactive"}
+                                                        </td>
+                                                        <td>
+                                                            {ele.status}
+                                                        </td>
+                                                        <td>
+                                                            {
+                                                                moment(ele.createdAt).fromNow()
+                                                            }
+                                                        </td>
+                                                        <td>
+                                                            <button className="btn btn-danger btn-small">Delete</button>
+                                                        </td>
+                                                    </tr>
+                                                ))
+                                            }
+                                        </tbody>
+                                    </Table>
                                 </div>
                             </div>
                         </div>

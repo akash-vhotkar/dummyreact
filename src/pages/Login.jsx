@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
 import { login } from "../store/action/auth.action";
-import { Link, useHistory } from "react-router-dom";
+import {  Link } from "react-router-dom";
 import { CLEAR_LOGIN_ERRORS } from "../store/constant";
 import HolyPennies from '../assets/images/HolyPennies-Logo.png';
 
 function Login(props) {
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const [data, setData] = useState({
     email: "",
@@ -19,10 +18,12 @@ function Login(props) {
 
   useEffect(() => {
     if (loginerror.length > 0) {
-      loginerror.map(loginer => {
+      
+      loginerror.map(function(loginer){
         toast.error(loginer.message);
         dispatch({ type: CLEAR_LOGIN_ERRORS, payload: [] });
       })
+
     };
     if (token) {
       window.location.href = "/dashboard";
@@ -110,9 +111,8 @@ function Login(props) {
                           Keep me signed in
                         </label>
                       </div>
-                      <a href="#" className="auth-link text-black"
-                      >Forgot password?</a
-                      >
+                      <Link to="/" className="auth-link text-black"
+                      >Forgot password?</Link>
                     </div>
 
                   </form>

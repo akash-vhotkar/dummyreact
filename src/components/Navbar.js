@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import HolyPennies from '../assets/images/HolyPennies-Logo.png';
 import holyMini from '../assets/images/logo-mini.svg';
 import face from '../assets/images/face1.jpg';
+import LoadingBar from 'react-top-loading-bar'
 import { useDispatch } from 'react-redux';
 import { SWITCH_NAV } from '../store/constant';
+import { Link } from 'react-router-dom';
+
 
 export default function Navbar() {
+  const [progress, setProgressBar] = useState(50);
+  setTimeout(() => {
+    setProgressBar(100)
+  }, 500);
   const dispatch = useDispatch();
 
   const switchNav = () => {
@@ -13,10 +20,15 @@ export default function Navbar() {
   }
   return (
     <>
+      <LoadingBar
+        color='#f11946'
+        progress={progress}
+        height={4}
+      />
       <nav className="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a className="navbar-brand brand-logo mr-5" href="index.html"><img src={HolyPennies} className="mr-2" alt="logo" /></a>
-          <a className="navbar-brand brand-logo-mini" href="index.html"><img src={holyMini} alt="logo" /></a>
+          <Link className="navbar-brand brand-logo mr-5" to="/dashboard"><img src={HolyPennies} className="mr-2" alt="logo" /></Link>
+          <Link className="navbar-brand brand-logo-mini" to="/dashboard"><img src={holyMini} alt="logo" /></Link>
         </div>
         <div className="navbar-menu-wrapper d-flex align-items-center justify-content-end">
           <button className="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -36,7 +48,7 @@ export default function Navbar() {
           </ul>
           <ul className="navbar-nav navbar-nav-right">
             <li className="nav-item dropdown show">
-              <a className="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+              <a className="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="/#" data-toggle="dropdown">
                 <i className="icon-bell mx-0" />
                 <span className="count" />
               </a>
@@ -68,7 +80,7 @@ export default function Navbar() {
                     </p>
                   </div>
                 </a>
-                <a className="dropdown-item preview-item">
+                <a href="/#" className="dropdown-item preview-item">
                   <div className="preview-thumbnail">
                     <div className="preview-icon bg-info">
                       <i className="ti-user mx-0" />
@@ -84,22 +96,22 @@ export default function Navbar() {
               </div>
             </li>
             <li className="nav-item nav-profile dropdown">
-              <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <a href="/#" className="nav-link dropdown-toggle" data-toggle="dropdown" id="profileDropdown">
                 <img src={face} alt="profile" />
               </a>
               <div className="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                <a className="dropdown-item">
+                <a href="/#" className="dropdown-item">
                   <i className="ti-settings text-primary" />
                   Settings
                 </a>
-                <a className="dropdown-item">
+                <a href="/#" className="dropdown-item">
                   <i className="ti-power-off text-primary" />
                   Logout
                 </a>
               </div>
             </li>
             <li className="nav-item nav-settings d-none d-lg-flex">
-              <a className="nav-link" href="#">
+              <a href="/#" className="nav-link">
                 <i className="icon-ellipsis" />
               </a>
             </li>

@@ -32,10 +32,10 @@ export default function Dashboard() {
                               <i className="mdi mdi-calendar" /> Today (10 Jan 2021)
                             </button>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
-                              <a className="dropdown-item" href="#">January - March</a>
-                              <a className="dropdown-item" href="#">March - June</a>
-                              <a className="dropdown-item" href="#">June - August</a>
-                              <a className="dropdown-item" href="#">August - November</a>
+                              <a className="dropdown-item" href="/#">January - March</a>
+                              <a className="dropdown-item" href="/#">March - June</a>
+                              <a className="dropdown-item" href="/#">June - August</a>
+                              <a className="dropdown-item" href="/#">August - November</a>
                             </div>
                           </div>
                         </div>
@@ -127,7 +127,7 @@ export default function Dashboard() {
                       <div className="card-body">
                         <div className="d-flex justify-content-between">
                           <p className="card-title">Revenue Report</p>
-                          <a href="#" className="text-info">View all</a>
+                          <a href="/#" className="text-info">View all</a>
                         </div>
                         <p className="font-weight-500">The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc</p>
                         <div id="sales-legend" className="chartjs-legend mt-4 mb-2" />
@@ -303,11 +303,11 @@ export default function Dashboard() {
                               </div>
                             </div>
                           </div>
-                          <a className="carousel-control-prev" href="#detailedReports" role="button" data-slide="prev">
+                          <a href="/#" className="carousel-control-prev"  role="button" data-slide="prev">
                             <span className="carousel-control-prev-icon" aria-hidden="true" />
                             <span className="sr-only">Previous</span>
                           </a>
-                          <a className="carousel-control-next" href="#detailedReports" role="button" data-slide="next">
+                          <a href="#detailedReports" className="carousel-control-next"  role="button" data-slide="next">
                             <span className="carousel-control-next-icon" aria-hidden="true" />
                             <span className="sr-only">Next</span>
                           </a>
@@ -321,16 +321,16 @@ export default function Dashboard() {
               {/* partial:partials/_footer.html */}
               <footer className="footer">
                 <div className="d-sm-flex justify-content-center justify-content-sm-between">
-                  <span className="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Holy Pennies <a href="#" target="_blank"> All rights reserved.</a></span><a href="#" target="_blank">
+                  <span className="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Holy Pennies <a href="/#" target="_blank"> All rights reserved.</a></span><a href="/#" target="_blank">
                     <span className="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted &amp; made with <i className="ti-heart text-danger ml-1" /></span>
-                  </a></div><a href="#" target="_blank">
-                </a></footer><a href="#" target="_blank">
+                  </a></div><a href="/#" target="_blank">
+                </a></footer><a href="/#" target="_blank">
                 {/* partial */}
-              </a></div><a href="#" target="_blank">
+              </a></div><a href="/#" target="_blank">
               {/* main-panel ends */}
-            </a></div><a href="#" target="_blank">
+            </a></div><a href="/#" target="_blank">
             {/* page-body-wrapper ends */}
-          </a></div><a href="#" target="_blank">
+          </a></div><a href="/#" target="_blank">
         </a></div>
     </div>
   )

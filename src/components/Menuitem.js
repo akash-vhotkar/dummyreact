@@ -10,7 +10,7 @@ export default function Menuitem({ data, subMenu }) {
             {
                 subMenu && subMenu.length > 0 ? (
                     <li onClick={() => setExpend(!Expend)} className="nav-item">
-                        <a className="nav-link" data-toggle="collapse" href="#" aria-expanded={Expend} aria-controls="form-elements">
+                        <a href="javascript:void(0)" className="nav-link" data-toggle="collapse" aria-expanded={Expend} aria-controls="form-elements">
                             <i className={data.icon} />
                             <span className="menu-title">{data.name}</span>
                             <i className="menu-arrow" />
@@ -27,7 +27,7 @@ export default function Menuitem({ data, subMenu }) {
                     </li>
                 ) : (
                     <NavLink activeClassName="active" to={data.to} onClick={data.onClick} className="nav-item">
-                        <a className="nav-link">
+                        <a href="javascript:void(0)" className="nav-link">
                             <i className={data.icon} />
                             <span className="menu-title">{data.name}</span>
                         </a>
