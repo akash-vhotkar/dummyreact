@@ -21,6 +21,7 @@ function App() {
       <ToastContainer />
       <Switch>
         <Route exact path="/" component={Login} />
+        
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/addhow" component={Addhow} />
         <PrivateRoute exact path="/viewhow" component={Viewhow} />
