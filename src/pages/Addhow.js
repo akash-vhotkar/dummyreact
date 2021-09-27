@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import HoverLoader from '../components/HoverLoader';
 import Layout from '../container/Layout'
 import { AddHow } from '../store/action/hollyhouse.action';
 
 export default function Addhow() {
+
   const dispatch = useDispatch();
+  const [Loading, setLoading] = useState(false);
 
   const [Data, setData] = useState({
     email: "",
@@ -16,6 +19,16 @@ export default function Addhow() {
   });
 
   const [File, setFile] = useState(null);
+
+  const handelImage = (e) => {
+    let fileData = e.target.files[0];
+    if (fileData.type === "image/jpg" || fileData.type === "image/jpeg" || fileData.type === "image/png" || fileData.type === "image/img") {
+      setFile(fileData);
+    } else {
+      toast.warning("File format not allowd");
+    }
+    console.log(fileData.type);
+  }
 
 
   const AddData = async (formData) => {
@@ -28,6 +41,9 @@ export default function Addhow() {
         org_name: "",
         org_desc: ""
       })
+      setLoading(false);
+    } else {
+      setLoading(false);
     }
   }
 
@@ -47,8 +63,9 @@ export default function Addhow() {
     if (File) {
       form_data.append('file', File);
     }
-    AddData(form_data);
 
+    setLoading(true);
+    AddData(form_data);
   }
 
   const onChange = (e) => {
@@ -57,9 +74,11 @@ export default function Addhow() {
 
   return (
     <React.Fragment>
+      {
+        Loading ? <HoverLoader /> : ""
+      }
       <Layout>
         <div className="content-wrapper">
-
           <div className="row">
             <div className="col-12 grid-margin">
               <div className="card">
@@ -70,21 +89,21 @@ export default function Addhow() {
                     <section id="steps-uid-0-p-0" role="tabpanel" aria-labelledby="steps-uid-0-h-0" className="body current" aria-hidden="false">
                       <div className="form-group">
                         <label>Email address*</label>
-                        <input type="email"  value={Data.email} className="form-control" name="email" onChange={onChange} placeholder="Enter email" required />
+                        <input type="email" value={Data.email} className="form-control" name="email" onChange={onChange} placeholder="John@example.com" required />
                         <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                       </div>
                       <div className="form-group">
                         <label>Name Of Admin*</label>
-                        <input type="text" name="name" value={Data.name} className="form-control" onChange={onChange} placeholder="Name Of Admin" required />
+                        <input type="text" name="name" value={Data.name} className="form-control" onChange={onChange} placeholder="John" required />
                       </div>
                       <div className="form-group">
                         <label>Mobile Number*</label>
-                        <input type="number" value={Data.mobile} name="mobile" className="form-control" onChange={onChange} placeholder="Enter number" required />
+                        <input type="number" value={Data.mobile} name="mobile" className="form-control" onChange={onChange} placeholder="91+485818181" required />
                       </div>
 
                       <div className="form-group">
                         <label>Organization Name*</label>
-                        <input type="text" value={Data.org_name} className="form-control" name="org_name" onChange={onChange} placeholder="Enter Organization name" required />
+                        <input type="text" value={Data.org_name} className="form-control" name="org_name" onChange={onChange} placeholder="emample" required />
                       </div>
 
                       <div className="form-group">
@@ -93,10 +112,9 @@ export default function Addhow() {
                       </div>
 
                       <div className="form-group">
-                        <label>Organization Logo</label>
-                        <input type="file" className="form-control" name="file" placeholder="Enter Organization name" />
+                        <label>Upload Organization Logo (jpg,img,png,jpeg)</label>
+                        <input type="file" onChange={handelImage} className="form-control" name="file" placeholder="Upload Organization logo" />
                       </div>
-
                     </section>
                     <button className="btn btn-primary btn-block">Create</button>
                   </form>
