@@ -4,7 +4,7 @@ import Sidebar from '../../components/Sidebar'
 import Footer from '../../components/Footer';
 
 export default function Layout(props) {
- 
+
     return (
         <React.Fragment>
             <div>
