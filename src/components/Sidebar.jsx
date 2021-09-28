@@ -1,16 +1,45 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Menuitem from './Menuitem';
 import { LOG_OUT } from '../store/constant';
+import { withRouter } from 'react-router';
 
 
-export default function Sidebar() {
+function Sidebar(props) {
   const { isNav } = useSelector(state => state.auth);
+  const expand = useSelector(state => state.UserReducer.expand)
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!expand) {
+      switch (props.location.pathname) {
+        case '/viewdonner':
+        case '/donnerrevnue':
+          dispatch({ type: 'SET_EXPAND', expand: 'Donors' })
+          break;
+        case '/viewhow':
+        case '/addhow':
+        case '/viewrevnue':
+          dispatch({ type: 'SET_EXPAND', expand: 'Holy House' })
+          break;
+        case '/fullrevennue':
+          dispatch({ type: 'SET_EXPAND', expand: 'Revenue Section' })
+          break;
+        case '/dashboard':
+          dispatch({ type: 'SET_EXPAND', expand: 'Dashboard' })
+        default:
+          break;
+      }
+    }
+  }, [props.location.pathname])
 
   const logout = () => {
     localStorage.removeItem('jwt');
     dispatch({ type: LOG_OUT });
+  }
+
+  const setExpand = (key) => {
+    dispatch({ type: 'SET_EXPAND', expand: key })
   }
 
   const [menuData, setMenuData] = useState([
@@ -33,7 +62,10 @@ export default function Sidebar() {
                 <Menuitem
                   key={ind}
                   data={ele}
+                  setExpand={setExpand}
+                  expand={expand}
                   subMenu={ele.subMenu}
+                  location={props.location}
                 />
               </>
             ))
@@ -43,3 +75,5 @@ export default function Sidebar() {
     </div>
   )
 }
+
+export default withRouter(Sidebar)

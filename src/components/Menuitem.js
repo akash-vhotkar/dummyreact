@@ -2,32 +2,38 @@ import React, { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 // import { Camera } from 'react-feather';
 
-export default function Menuitem({ data, subMenu }) {
-    const [Expend, setExpend] = useState(false);
-
+export default function Menuitem({ data, subMenu, expand, setExpand, location }) {
     return (
         <>
             {
                 subMenu && subMenu.length > 0 ? (
-                    <li onClick={() => setExpend(!Expend)} className="nav-item">
-                        <a href="javascript:void(0)" className="nav-link" data-toggle="collapse" aria-expanded={Expend} aria-controls="form-elements">
+                    <li onClick={() => setExpand(data.name)} className="nav-item">
+                        <a href="javascript:void(0)" className={(expand === data.name) ? "nav-link main-selected" : "nav-link"} data-toggle="collapse" aria-controls="form-elements">
                             <i className={data.icon} />
                             <span className="menu-title">{data.name}</span>
                             <i className="menu-arrow" />
                         </a>
-                        <div className={Expend ? "collapse show" : "collapse"} id="form-elements">
+                        <div className={(expand === data.name) ? "collapse show" : "collapse"} id="form-elements">
                             <ul className="nav flex-column sub-menu">
                                 {
                                     subMenu.map((ele, ind) => (
-                                        <li key={ind} className="nav-item"><Link onClick={data.onClick} className="nav-link" to={ele.to}>{ele.name}</Link></li>
+                                        <li key={ind} className="nav-item"><Link onClick={data.onClick} className={(location.pathname === ele.to) ? "nav-link selected" : "nav-link"} to={ele.to}>{ele.name}</Link></li>
                                     ))
                                 }
                             </ul>
                         </div>
                     </li>
                 ) : (
-                    <NavLink activeClassName="active" to={data.to} onClick={data.onClick} className="nav-item">
-                        <a href="javascript:void(0)" className="nav-link">
+                    <NavLink
+                        activeClassName="act"
+                        to={data.to}
+                        onClick={() => {
+
+                            // data.onClick()
+                            setExpand(data.name)
+                        }}
+                        className="nav-item">
+                        <a href="javascript:void(0)" className={(expand === data.name) ? "nav-link main-selected" : "nav-link"}>
                             <i className={data.icon} />
                             <span className="menu-title">{data.name}</span>
                         </a>
