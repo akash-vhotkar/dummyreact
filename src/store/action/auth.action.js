@@ -5,9 +5,8 @@ import axiosinstance from "../../config/axios"
 export const login = (User) => {
     return async (dispatch) => {
         try {
-            const { data } = await axiosinstance.post('/admin/login', User);
+            const { data } = await axiosinstance.post('/hp/login', User);
             localStorage.setItem('jwt', data.data.token);
-            // console.log(data.data);
             dispatch({ type: SET_TOKEN, payload: data.data.token });
         } catch (error) {
             if (error.response && error.response.data.error) {

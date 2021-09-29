@@ -27,8 +27,8 @@ axiosinstance.interceptors.response.use((res) => {
     }
     return res;
 }, (error) => {
-    const status = error.response.status ? error.response.status : 500;
-    if (status && status === 500) {
+    const status = error.response.status ? error.response.status : 401;
+    if (status && status === 401) {
         localStorage.clear('token');
         store.dispatch({
             type: LOG_OUT
