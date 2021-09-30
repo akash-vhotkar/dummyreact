@@ -6,15 +6,15 @@ import LoadingBar from 'react-top-loading-bar'
 import { useDispatch } from 'react-redux';
 import { SWITCH_NAV } from '../store/constant';
 import { Link } from 'react-router-dom';
-
+import ProfileMenu from './profileMenu'
 
 export default function Navbar() {
   const [progress, setProgressBar] = useState(50);
-  
+
   setTimeout(() => {
     setProgressBar(100)
-  }, 500);  
-  
+  }, 500);
+
   const dispatch = useDispatch();
 
   const switchNav = () => {
@@ -113,9 +113,10 @@ export default function Navbar() {
               </div>
             </li>
             <li className="nav-item nav-settings d-none d-lg-flex">
-              <a href="/#" className="nav-link">
+              <ProfileMenu />
+              {/* <a className="nav-link">
                 <i className="icon-ellipsis" />
-              </a>
+              </a> */}
             </li>
           </ul>
           <button onClick={switchNav} className="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">

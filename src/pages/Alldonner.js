@@ -1,36 +1,50 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Layout from '../container/Layout'
 import face from '../assets/images/face1.jpg';
 import CustomTable from '../container/CustomTable';
+import { getDonor } from '../store/action/donor.action';
+import { useDispatch } from 'react-redux';
 
 export default function Alldonner() {
+    const [data, setData] = useState([]);
+    const dispatch = useDispatch();
+
+    useEffect(async () => {
+        const data = await dispatch(getDonor());
+        setData(data);
+    }, [])
+
     let columns = [{
-        dataField: 'user',
+        dataField: 'image',
         text: 'User',
-        formatter: () => {
+        formatter: (cellContent, row) => {
             return (
-                <img src={face} alt="ini" />
+                <img src={row.image} alt="ini" />
             )
         }
     }, {
-        dataField: 'name',
-        text: 'Name'
+        dataField: 'first_name',
+        text: 'First Name'
     }, {
-        dataField: 'progress',
-        text: 'Progress',
-        formatter: () => {
+        dataField: 'last_name',
+        text: 'Last Name'
+    }, {
+        dataField: 'email',
+        text: 'Email',
+        headerStyle: (colum, colIndex) => {
+            return { width: "250px", textAlign: "left" };
+        },
+        formatter: (cellContent, row) => {
             return (
-                <div className="progress">
-                    <div className="progress-bar bg-success" role="progressbar" style={{ width: '80%' }} aria-valuenow={25} aria-valuemin={0} aria-valuemax={100} />
-                </div>
+                <div className="table-action">{row.email}</div>
             )
         }
     }, {
-        dataField: 'amount',
-        text: 'amount'
+        dataField: 'mobile',
+        text: 'Contact Number'
     }, {
-        dataField: 'deadline',
-        text: 'Deadline'
+        dataField: 'isactive',
+        text: 'Active'
     }]
     return (
         <React.Fragment>
@@ -41,15 +55,11 @@ export default function Alldonner() {
                             <div className="card">
                                 <div className="card-body">
                                     <h4 className="card-title">View Donner </h4>
-                                    <CustomTable
+                                    {data && data.length ? <CustomTable
                                         columns={columns}
                                         noDataIndication='No data found'
-                                        tableData={[{
-                                            name: 'Herman Beck',
-                                            amount: ' $ 77.99',
-                                            deadline: ' May 15, 2015    '
-                                        }]}
-                                    />
+                                        tableData={data}
+                                    /> : "Loading..."}
                                 </div>
                             </div>
                         </div>

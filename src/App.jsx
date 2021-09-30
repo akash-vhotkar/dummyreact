@@ -11,25 +11,27 @@ import Alldonner from "./pages/Alldonner";
 import Viewrevnue from "./pages/Viewrevnue";
 import DonnerRevenue from "./pages/DonnerRevenue";
 import Fullrevenue from "./pages/Fullrevenue";
+import ResetPassword from "./pages/ResetPassword";
 // import { useSelector, useDispatch } from "react-redux";
 
 function App() {
   // const {token,user} = useSelector(state => state.auth)
-  
+
   return (
     <>
       <ToastContainer />
       <Switch>
         <Route exact path="/" component={Login} />
-        
+
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute exact path="/reset-password" component={ResetPassword} />
         <PrivateRoute exact path="/addhow" component={Addhow} />
         <PrivateRoute exact path="/viewhow" component={Viewhow} />
         <PrivateRoute exact path="/viewdonner" component={Alldonner} />
         <PrivateRoute exact path="/viewrevnue" component={Viewrevnue} />
         <PrivateRoute exact path="/donnerrevnue" component={DonnerRevenue} />
         <PrivateRoute exact path="/fullrevennue" component={Fullrevenue} />
-        
+
 
         <Redirect to="/" />
       </Switch>
