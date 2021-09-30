@@ -27,7 +27,6 @@ export default function Addhow() {
     } else {
       toast.warning("File format not allowd");
     }
-    console.log(fileData.type);
   }
 
 

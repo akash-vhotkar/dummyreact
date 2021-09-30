@@ -12,7 +12,6 @@ export default function Viewhow() {
 
     useEffect(async () => {
         const data = await dispatch(ViewHow());
-        console.log(data);
         setData(data);
     }, [])
 

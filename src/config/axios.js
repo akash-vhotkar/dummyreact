@@ -2,7 +2,6 @@ import axios from 'axios';
 import { API_URL } from './Env';
 import store from '../store';
 import { LOG_OUT, SET_TOKEN } from '../store/constant';
-
 const prevTOken = localStorage.getItem('jwt');
 
 const axiosinstance = axios.create({
@@ -27,8 +26,8 @@ axiosinstance.interceptors.response.use((res) => {
     }
     return res;
 }, (error) => {
-    const status = error.response.status ? error.response.status : 500;
-    if (status && status === 500) {
+    const status = error.response.status ? error.response.status : 401;
+    if (status && status === 401) {
         localStorage.clear('token');
         store.dispatch({
             type: LOG_OUT
