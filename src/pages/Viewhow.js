@@ -3,12 +3,14 @@ import Layout from '../container/Layout'
 import Table from '../container/Table';
 import face from '../assets/images/face1.jpg';
 import { useDispatch } from 'react-redux';
-import { ViewHow } from '../store/action/hollyhouse.action';
+import { ViewHow, deleteOrg } from '../store/action/hollyhouse.action';
 import moment from 'moment';
 import CustomTable from '../container/CustomTable';
+import ConfirmationModal from '../container/ConfirmationModal/ConfirmationModal'
 
 export default function Viewhow() {
     const [Data, setData] = useState([]);
+    const [currentRow, setCurrentRow] = useState({});
     const dispatch = useDispatch();
 
     useEffect(async () => {
@@ -17,35 +19,20 @@ export default function Viewhow() {
     }, [])
 
     let columns = [{
-        dataField: 'image',
-        text: 'Logo',
-        headerStyle: (colum, colIndex) => {
-            return { width: "100px", textAlign: "left" };
-        },
-        formatter: (cellContent, row) => {
-            return (
-                <img src={face} alt="ini" />
-            )
-        }
-    }, {
         dataField: 'org_name',
         text: 'Name',
         searchable: true,
-        headerStyle: (colum, colIndex) => {
-            return { width: "170px", textAlign: "left" };
-        },
         formatter: (cellContent, row) => {
             return (
-                <div className="table-action">{row.org_name}</div>
+                <div className="table-action">
+                    <img style={{ marginRight: '5px' }} src={face} alt="ini" />{row.org_name}
+                </div>
             )
         }
     }, {
         dataField: 'admin_email',
         text: 'Email',
         searchable: true,
-        headerStyle: (colum, colIndex) => {
-            return { width: "220px", textAlign: "left" };
-        },
         formatter: (cellContent, row) => {
             return (
                 <div className="table-action">{row.admin_email}</div>
@@ -55,9 +42,6 @@ export default function Viewhow() {
         dataField: 'status',
         text: 'Acc Status',
         searchable: true,
-        headerStyle: (colum, colIndex) => {
-            // return { width: "100px", textAlign: "left" };
-        },
         formatter: (cellContent, row) => {
             return (row.isactive ? "Active" : "Deactive")
         }
@@ -65,9 +49,6 @@ export default function Viewhow() {
         dataField: 'amount',
         text: 'Amount Approved',
         searchable: true,
-        headerStyle: (colum, colIndex) => {
-            return { width: "130px", textAlign: "left" };
-        },
         formatter: (cellContent, row) => {
             return row.status
         }
@@ -82,16 +63,19 @@ export default function Viewhow() {
         dataField: 'action',
         isDummyField: true,
         text: 'Action',
-        headerStyle: (colum, colIndex) => {
-            return { width: "100px", textAlign: "left" };
-        },
         formatter: (cellContent, row) => {
             return (
-                <button className="btn btn-danger btn-small">Delete</button>
+                <button onClick={() => { setCurrentRow(row) }} className="btn btn-danger btn-small">Delete</button>
             );
         }
     }]
 
+    const doneClickHandler = async () => {
+        const data = await dispatch(deleteOrg(currentRow.id))
+        if (data) {
+            setCurrentRow({})
+        }
+    }
     return (
         <React.Fragment>
             <Layout>
@@ -112,6 +96,15 @@ export default function Viewhow() {
                     </div>
                 </div>
             </Layout>
+            {currentRow && currentRow.id ?
+                <ConfirmationModal
+                    open={true}
+                    buttonText="delete"
+                    doneClick={doneClickHandler}
+                    modalTitle={`Delete Organization`}
+                    message={`Are you sure you want to delete ${currentRow.org_name}?`}
+                    handleClose={() => { setCurrentRow({}) }} /> : null
+            }
         </React.Fragment>
     )
 }

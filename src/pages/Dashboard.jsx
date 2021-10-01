@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
 import people from '../assets/images/people.svg';
+import { useDispatch } from 'react-redux';
+import { getHowCount } from '../store/action/hollyhouse.action';
+
 
 export default function Dashboard() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getHowCount())
+  }, [])
   return (
     <div>
       <div>
@@ -303,11 +310,11 @@ export default function Dashboard() {
                               </div>
                             </div>
                           </div>
-                          <a href="/#" className="carousel-control-prev"  role="button" data-slide="prev">
+                          <a href="/#" className="carousel-control-prev" role="button" data-slide="prev">
                             <span className="carousel-control-prev-icon" aria-hidden="true" />
                             <span className="sr-only">Previous</span>
                           </a>
-                          <a href="#detailedReports" className="carousel-control-next"  role="button" data-slide="next">
+                          <a href="#detailedReports" className="carousel-control-next" role="button" data-slide="next">
                             <span className="carousel-control-next-icon" aria-hidden="true" />
                             <span className="sr-only">Next</span>
                           </a>

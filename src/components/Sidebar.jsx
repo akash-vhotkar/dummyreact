@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import Menuitem from './Menuitem';
 import { LOG_OUT } from '../store/constant';
 import { withRouter } from 'react-router';
-
+import ConfirmationModal from '../container/ConfirmationModal/ConfirmationModal'
 
 function Sidebar(props) {
   const { isNav } = useSelector(state => state.auth);
+  const [logoutClick, setLogoutClick] = useState(false)
   const expand = useSelector(state => state.UserReducer.expand)
   const dispatch = useDispatch();
 
@@ -39,7 +40,12 @@ function Sidebar(props) {
   }
 
   const setExpand = (key) => {
-    dispatch({ type: 'SET_EXPAND', expand: key })
+    console.log("888888888888888888", key)
+    if (key === 'Logout') {
+      setLogoutClick(true)
+    } else {
+      dispatch({ type: 'SET_EXPAND', expand: key })
+    }
   }
 
   const [menuData, setMenuData] = useState([
@@ -49,7 +55,7 @@ function Sidebar(props) {
     { name: "Donors", to: "/#", icon: "icon-columns menu-icon", subMenu: [{ name: "All Donors", to: "/viewdonner" }, { name: "Donors revennu", to: "/donnerrevnue" }] },
     { name: "Payment Setting", to: "/#", icon: "icon-bar-graph menu-icon", subMenu: [{ name: "Stripe", to: "/c" }, { name: "Pled", to: "/c" }] },
     { name: "Revenu Section", to: "/#", icon: "icon-grid-2 menu-icon", subMenu: [{ name: "Full Revenue", to: "/fullrevennue" }] },
-    { name: "Logout", to: "void(0)", onClick: logout, icon: "icon-grid-2 menu-icon", subMenu: [] },
+    { name: "Logout", to: "void(0)", icon: "icon-grid-2 menu-icon", subMenu: [] },
   ])
 
   return (
@@ -66,12 +72,21 @@ function Sidebar(props) {
                   expand={expand}
                   subMenu={ele.subMenu}
                   location={props.location}
+                  setLogoutClick={setLogoutClick}
                 />
               </>
             ))
           }
         </ul>
       </nav>
+      {logoutClick ? <ConfirmationModal
+        open={true}
+        doneClick={logout}
+        buttonText="Logout"
+        modalTitle={`User Logout`}
+        message={`Are you sure you want to logout?`}
+        handleClose={() => { setLogoutClick(false) }} /> : null
+      }
     </div>
   )
 }

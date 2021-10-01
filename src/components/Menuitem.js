@@ -27,8 +27,10 @@ export default function Menuitem({ data, subMenu, expand, setExpand, location })
                     <NavLink
                         activeClassName="act"
                         to={data.to}
-                        onClick={() => {
-
+                        onClick={(e) => {
+                            if (data.name === 'Logout') {
+                                e.preventDefault()
+                            }
                             // data.onClick()
                             setExpand(data.name)
                         }}

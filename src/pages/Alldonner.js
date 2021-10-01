@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import Layout from '../container/Layout'
 import face from '../assets/images/face1.jpg';
 import CustomTable from '../container/CustomTable';
-import { getDonor } from '../store/action/donor.action';
+import { getDonor, deleteDonor } from '../store/action/donor.action';
 import { useDispatch } from 'react-redux';
+import ConfirmationModal from '../container/ConfirmationModal/ConfirmationModal'
 
 export default function Alldonner() {
-    const [data, setData] = useState([]);
     const dispatch = useDispatch();
+    const [data, setData] = useState([]);
+    const [currentRow, setCurrentRow] = useState({});
 
     useEffect(async () => {
         const data = await dispatch(getDonor());
@@ -31,9 +33,6 @@ export default function Alldonner() {
     }, {
         dataField: 'email',
         text: 'Email',
-        headerStyle: (colum, colIndex) => {
-            return { width: "250px", textAlign: "left" };
-        },
         formatter: (cellContent, row) => {
             return (
                 <div className="table-action">{row.email}</div>
@@ -45,7 +44,23 @@ export default function Alldonner() {
     }, {
         dataField: 'isactive',
         text: 'Active'
+    },
+    {
+        dataField: 'action',
+        isDummyField: true,
+        text: 'Action',
+        formatter: (cellContent, row) => {
+            return (
+                <button onClick={() => { setCurrentRow(row) }} className="btn btn-danger btn-small">Delete</button>
+            );
+        }
     }]
+    const doneClickHandler = async () => {
+        const data = await dispatch(deleteDonor(currentRow.id))
+        if (data) {
+            setCurrentRow({})
+        }
+    }
     return (
         <React.Fragment>
             <Layout>
@@ -66,6 +81,15 @@ export default function Alldonner() {
                     </div>
                 </div>
             </Layout>
+            {currentRow && currentRow.id ?
+                <ConfirmationModal
+                    open={true}
+                    doneClick={doneClickHandler}
+                    buttonText="Delete"
+                    modalTitle={`Delete User`}
+                    message={`Are you sure you want to delete ${currentRow.first_name} ${currentRow.last_name}?`}
+                    handleClose={() => { setCurrentRow({}) }} /> : null
+            }
         </React.Fragment>
     )
 }

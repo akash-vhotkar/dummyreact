@@ -13,3 +13,18 @@ export const getDonor = () => {
 
     }
 }
+
+export const deleteDonor = (id) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axiosinstance.delete(`/hp/donors/${id}`);
+            toast.success("User deleted successfully");
+            dispatch(getDonor())
+            return data.data;
+
+        } catch (error) {
+            toast.error("Something went wrong");
+        }
+
+    }
+}

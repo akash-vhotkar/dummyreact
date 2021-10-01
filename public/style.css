@@ -30610,6 +30610,15 @@ div.tagsinput span.tag a {
   left: 30px;
 }
 
+.react-bootstrap-table{
+  width: 100%;
+  overflow-x: auto;
+}
+
+.react-bootstrap-table table{
+  table-layout: unset !important;
+}
+
 .table > thead > tr > th,
 .table > tbody > tr > th,
 .table > tfoot > tr > th,

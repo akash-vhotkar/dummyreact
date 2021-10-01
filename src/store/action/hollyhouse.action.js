@@ -20,13 +20,40 @@ export const AddHow = (userData) => {
 export const ViewHow = () => {
     return async (dispatch) => {
         try {
-            const {data} = await axiosinstance.get('/hp/hows');
+            const { data } = await axiosinstance.get('/hp/hows');
             return data.data;
         } catch (error) {
-            
+
             toast.error("Something went wrong");
         }
 
     }
 }
 
+export const getHowCount = () => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axiosinstance.get('/hp/how-count');
+            return data.data;
+        } catch (error) {
+
+            toast.error("Something went wrong");
+        }
+
+    }
+}
+
+export const deleteOrg = (id) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axiosinstance.delete(`/hp/hows/${id}`);
+            toast.success("Organization deleted successfully");
+            dispatch(ViewHow())
+            return data.data;
+
+        } catch (error) {
+            toast.error("Something went wrong");
+        }
+
+    }
+}
