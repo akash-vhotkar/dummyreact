@@ -46,7 +46,7 @@ export const getHowCount = () => {
 export const deleteOrg = (id) => {
     return async (dispatch) => {
         try {
-            const { data } = await axiosinstance.delete(`/hp/hows/${id}`);
+            const { data } = await axiosinstance.delete(`/hp/how/${id}`);
             toast.success("Organization deleted successfully");
             dispatch(ViewHow())
             return data.data;
