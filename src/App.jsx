@@ -12,6 +12,8 @@ import Viewrevnue from "./pages/Viewrevnue";
 import DonnerRevenue from "./pages/DonnerRevenue";
 import Fullrevenue from "./pages/Fullrevenue";
 import ResetPassword from "./pages/ResetPassword";
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPasswordLoginPage from './pages/ResetPasswordLoginPage/ResetPasswordLoginPage';
 // import { useSelector, useDispatch } from "react-redux";
 
 function App() {
@@ -22,7 +24,8 @@ function App() {
       <ToastContainer />
       <Switch>
         <Route exact path="/" component={Login} />
-
+        <Route exact path="/forgot-password" component={ForgotPassword} />
+        <Route exact path="/reset-password/:id" component={ResetPasswordLoginPage} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/reset-password" component={ResetPassword} />
         <PrivateRoute exact path="/addhow" component={Addhow} />

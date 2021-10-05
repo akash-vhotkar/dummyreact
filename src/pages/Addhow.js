@@ -40,6 +40,7 @@ export default function Addhow() {
         org_name: "",
         org_desc: ""
       })
+      setFile(null)
       setLoading(false);
     } else {
       setLoading(false);

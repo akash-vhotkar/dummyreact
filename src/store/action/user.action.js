@@ -14,3 +14,16 @@ export const ResetUserPassword = (formData) => {
 
     }
 }
+
+export const forgotPassword = (formData) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axiosinstance.post('/hp/forgot', formData);
+            toast.success("Reset password link has been sent to your email");
+            return data.data;
+        } catch (error) {
+            toast.error("Something went wrong");
+        }
+
+    }
+}

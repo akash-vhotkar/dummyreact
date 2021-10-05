@@ -2,42 +2,40 @@ import React, { useState, useEffect } from 'react'
 import Layout from '../container/Layout'
 import Table from '../container/Table';
 import face from '../assets/images/face1.jpg';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ViewHow, deleteOrg } from '../store/action/hollyhouse.action';
 import moment from 'moment';
 import CustomTable from '../container/CustomTable';
 import ConfirmationModal from '../container/ConfirmationModal/ConfirmationModal'
+// import CustomPagination from '../components/CustomPagination/CustomPagination';
 
 export default function Viewhow() {
     const [Data, setData] = useState([]);
     const [currentRow, setCurrentRow] = useState({});
+    // const [page, setPage] = useState(1);
+    // const loader = useSelector(state => state.HollyHouseReducer.loader)
     const dispatch = useDispatch();
 
     useEffect(async () => {
-        const data = await dispatch(ViewHow());
+        const data = await dispatch(ViewHow(1));
         setData(data);
     }, [])
 
     let columns = [{
-        dataField: 'org_name',
+        dataField: 'name',
         text: 'Name',
         searchable: true,
         formatter: (cellContent, row) => {
             return (
                 <div className="table-action">
-                    <img style={{ marginRight: '5px' }} src={face} alt="ini" />{row.org_name}
+                    <img style={{ marginRight: '5px' }} src={face} alt="ini" />{row.name}
                 </div>
             )
         }
     }, {
-        dataField: 'admin_email',
+        dataField: 'email',
         text: 'Email',
-        searchable: true,
-        formatter: (cellContent, row) => {
-            return (
-                <div className="table-action">{row.admin_email}</div>
-            )
-        }
+        searchable: true
     }, {
         dataField: 'status',
         text: 'Acc Status',
@@ -76,6 +74,11 @@ export default function Viewhow() {
             setCurrentRow({})
         }
     }
+
+    // const paginationHandler = async (page) => {
+    //     const data = await dispatch(ViewHow(page));
+    //     setData(data);
+    // }
     return (
         <React.Fragment>
             <Layout>
@@ -85,11 +88,17 @@ export default function Viewhow() {
                             <div className="card">
                                 <div className="card-body">
                                     <h4 className="card-title">View Organization list </h4>
-                                    {Data && Data.length ? <CustomTable
+                                    {(Data && Data.length) ? <CustomTable
                                         columns={columns}
                                         noDataIndication='No data found'
                                         tableData={Data}
                                     /> : "Loading..."}
+                                    {/* {!loader && (Data && Data.length) ? <CustomPagination
+                                        totalCount={"20"}
+                                        page={page}
+                                        setPage={setPage}
+                                        paginationHandler={paginationHandler}
+                                    /> : null} */}
                                 </div>
                             </div>
                         </div>
