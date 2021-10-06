@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
-import { forgotPassword } from "../../store/action/user.action";
+import { ResetUserPassword } from "../../store/action/user.action";
 import { Link, withRouter } from "react-router-dom";
 import { CLEAR_LOGIN_ERRORS } from "../../store/constant";
 import HolyPennies from '../../assets/images/HolyPennies-Logo.png';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 
-function ForgotPassword(props) {
+function ResetPassword(props) {
     const dispatch = useDispatch();
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
@@ -35,16 +35,16 @@ function ForgotPassword(props) {
     };
 
     const onSubmit = async (event) => {
+        let id = props.match.params && props.match.params.id
         let err = validate(data)
         if (err) {
             toast.error(err);
             return
         }
-        console.log(data, "ooooooooooooo")
-        // const resp = await dispatch(ResetUserPassword({ password: data.password, repeat_password: data.confirmPassword }));
-        // if (resp) {
-        //     setData({ password: '', confirmPassword: '' })
-        // }
+        const resp = await dispatch(ResetUserPassword({ password: data.password, repeat_password: data.confirmPassword, id: id }));
+        if (resp) {
+            setData({ password: '', confirmPassword: '' })
+        }
     };
 
 
@@ -98,4 +98,4 @@ function ForgotPassword(props) {
     );
 }
 
-export default withRouter(ForgotPassword);
+export default withRouter(ResetPassword);
