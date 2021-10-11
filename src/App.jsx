@@ -14,7 +14,7 @@ import Fullrevenue from "./pages/Fullrevenue";
 import ResetPassword from "./pages/ResetPassword";
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPasswordLoginPage from './pages/ResetPasswordLoginPage/ResetPasswordLoginPage';
-import Profile from './pages/Profile';
+// import Profile from './pages/Profile';
 // import { useSelector, useDispatch } from "react-redux";
 
 function App() {
