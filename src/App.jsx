@@ -30,7 +30,7 @@ function App() {
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/reset-password" component={ResetPassword} />
         <PrivateRoute exact path="/addhow" component={Addhow} />
-        <PrivateRoute exact path="/profile" component={Profile} />
+        {/* <PrivateRoute exact path="/profile" component={Profile} /> */}
         <PrivateRoute exact path="/viewhow" component={Viewhow} />
         <PrivateRoute exact path="/viewdonner" component={Alldonner} />
         <PrivateRoute exact path="/viewrevnue" component={Viewrevnue} />
