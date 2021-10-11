@@ -7,10 +7,10 @@ export const ResetUserPassword = (formData) => {
             const { data } = formData.id ?
                 await axiosinstance.post(`/hp/reset/${formData.id}`, { password: formData.password, repeat_password: formData.repeat_password }) :
                 await axiosinstance.post('/hp/reset', { password: formData.password, repeat_password: formData.repeat_password })
-            toast.success("Password Changed");
-            return data.data;
+            toast.success("Password changed successfully!");
+            return data.success;
         } catch (error) {
-            toast.error("Something went wrong");
+            toast.error((error.response.data && error.response.data.error && error.response.data.error.message) || "Something went wrong");
         }
 
     }

@@ -14,6 +14,7 @@ import Fullrevenue from "./pages/Fullrevenue";
 import ResetPassword from "./pages/ResetPassword";
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPasswordLoginPage from './pages/ResetPasswordLoginPage/ResetPasswordLoginPage';
+import Profile from './pages/Profile';
 // import { useSelector, useDispatch } from "react-redux";
 
 function App() {
@@ -25,10 +26,11 @@ function App() {
       <Switch>
         <Route exact path="/" component={Login} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
-        <Route exact path="/reset-password/:id" component={ResetPasswordLoginPage} />
+        <Route exact path="/hp/reset/:id" component={ResetPasswordLoginPage} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/reset-password" component={ResetPassword} />
         <PrivateRoute exact path="/addhow" component={Addhow} />
+        <PrivateRoute exact path="/profile" component={Profile} />
         <PrivateRoute exact path="/viewhow" component={Viewhow} />
         <PrivateRoute exact path="/viewdonner" component={Alldonner} />
         <PrivateRoute exact path="/viewrevnue" component={Viewrevnue} />

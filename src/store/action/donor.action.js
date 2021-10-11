@@ -1,10 +1,12 @@
 import { toast } from "react-toastify";
 import axiosinstance from "../../config/axios"
 
-export const getDonor = () => {
+export const getDonor = (page) => {
     return async (dispatch) => {
+        dispatch({ type: 'SET_DONOR_LOADER', loader: true })
         try {
-            const { data } = await axiosinstance.get('/hp/donors');
+            const { data } = await axiosinstance.get(`/hp/donors?page=${page}&limit=10`);
+            dispatch({ type: 'SET_DONOR_LOADER', loader: false })
             return data.data;
         } catch (error) {
 

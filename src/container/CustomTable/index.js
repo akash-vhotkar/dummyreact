@@ -76,7 +76,7 @@ class CustomTable extends Component {
                                     rowStyle={this.props.rowStyle}
                                     condensed
                                     noDataIndication={this.props.noDataIndication}
-                                    pagination={paginationFactory(options)}
+                                    // pagination={paginationFactory(options)}
                                     // selectRow={this.props.selectRow || null}
                                     {...props.baseProps}
                                 ></BootstrapTable>

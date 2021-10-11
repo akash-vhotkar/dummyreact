@@ -3,16 +3,19 @@ import Layout from '../container/Layout'
 import face from '../assets/images/face1.jpg';
 import CustomTable from '../container/CustomTable';
 import { getDonor, deleteDonor } from '../store/action/donor.action';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ConfirmationModal from '../container/ConfirmationModal/ConfirmationModal'
+import CustomPagination from '../components/CustomPagination/CustomPagination';
 
 export default function Alldonner() {
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
     const [currentRow, setCurrentRow] = useState({});
+    const [page, setPage] = useState(1);
+    const loader = useSelector(state => state.DonorReducer.loader)
 
     useEffect(async () => {
-        const data = await dispatch(getDonor());
+        const data = await dispatch(getDonor(1));
         setData(data);
     }, [])
 
@@ -61,6 +64,10 @@ export default function Alldonner() {
             setCurrentRow({})
         }
     }
+    const paginationHandler = async (page) => {
+        const data = await dispatch(getDonor(page));
+        setData(data);
+    }
     return (
         <React.Fragment>
             <Layout>
@@ -70,11 +77,22 @@ export default function Alldonner() {
                             <div className="card">
                                 <div className="card-body">
                                     <h4 className="card-title">View Donner </h4>
-                                    {data && data.length ? <CustomTable
-                                        columns={columns}
-                                        noDataIndication='No data found'
-                                        tableData={data}
-                                    /> : "Loading..."}
+                                    {data && data.rows && data.rows.length ?
+                                        <>
+                                            <CustomTable
+                                                columns={columns}
+                                                noDataIndication='No data found'
+                                                tableData={data.rows}
+                                            />
+                                            <CustomPagination
+                                                totalCount={data.count}
+                                                page={page}
+                                                setPage={setPage}
+                                                loader={loader}
+                                                paginationHandler={paginationHandler}
+                                            />
+                                        </>
+                                        : "Loading..."}
                                 </div>
                             </div>
                         </div>

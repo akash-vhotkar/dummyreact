@@ -7,13 +7,13 @@ import { ViewHow, deleteOrg } from '../store/action/hollyhouse.action';
 import moment from 'moment';
 import CustomTable from '../container/CustomTable';
 import ConfirmationModal from '../container/ConfirmationModal/ConfirmationModal'
-// import CustomPagination from '../components/CustomPagination/CustomPagination';
+import CustomPagination from '../components/CustomPagination/CustomPagination';
 
 export default function Viewhow() {
-    const [Data, setData] = useState([]);
+    const [Data, setData] = useState({});
     const [currentRow, setCurrentRow] = useState({});
-    // const [page, setPage] = useState(1);
-    // const loader = useSelector(state => state.HollyHouseReducer.loader)
+    const [page, setPage] = useState(1);
+    const loader = useSelector(state => state.HollyHouseReducer.loader)
     const dispatch = useDispatch();
 
     useEffect(async () => {
@@ -75,10 +75,10 @@ export default function Viewhow() {
         }
     }
 
-    // const paginationHandler = async (page) => {
-    //     const data = await dispatch(ViewHow(page));
-    //     setData(data);
-    // }
+    const paginationHandler = async (page) => {
+        const data = await dispatch(ViewHow(page));
+        setData(data);
+    }
     return (
         <React.Fragment>
             <Layout>
@@ -88,17 +88,23 @@ export default function Viewhow() {
                             <div className="card">
                                 <div className="card-body">
                                     <h4 className="card-title">View Organization list </h4>
-                                    {(Data && Data.length) ? <CustomTable
-                                        columns={columns}
-                                        noDataIndication='No data found'
-                                        tableData={Data}
-                                    /> : "Loading..."}
-                                    {/* {!loader && (Data && Data.length) ? <CustomPagination
-                                        totalCount={"20"}
-                                        page={page}
-                                        setPage={setPage}
-                                        paginationHandler={paginationHandler}
-                                    /> : null} */}
+                                    {(Data && Data.rows && Data.rows.length) ?
+                                        <>
+                                            <CustomTable
+                                                columns={columns}
+                                                noDataIndication='No data found'
+                                                tableData={Data.rows}
+                                                loader={loader}
+                                            />
+                                            <CustomPagination
+                                                totalCount={Data.count}
+                                                page={page}
+                                                setPage={setPage}
+                                                loader={loader}
+                                                paginationHandler={paginationHandler}
+                                            />
+                                        </>
+                                        : "Loading..."}
                                 </div>
                             </div>
                         </div>

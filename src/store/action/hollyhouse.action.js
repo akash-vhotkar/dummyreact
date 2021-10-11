@@ -21,7 +21,7 @@ export const ViewHow = (page) => {
     return async (dispatch) => {
         dispatch({ type: 'SET_LOADER', loader: true })
         try {
-            const { data } = await axiosinstance.get(`/hp/hows?page=${page}`);
+            const { data } = await axiosinstance.get(`/hp/hows?page=${page}&limit=10`);
             dispatch({ type: 'SET_LOADER', loader: false })
             return data.data;
         } catch (error) {

@@ -41,6 +41,7 @@ const ResetPassword = (props) => {
         const resp = await dispatch(ResetUserPassword({ password: data.password, repeat_password: data.confirmPassword }));
         if (resp) {
             setData({ password: '', confirmPassword: '' })
+            props.history.push('/')
         }
     }
 
@@ -76,7 +77,7 @@ const ResetPassword = (props) => {
                                             </div>
                                         </section>
                                         <button onClick={onSubmit} className="btn btn-primary btn-block">Reset Password</button>
-                                        <button onClick={() => props.history.goBack()} style={{ width: '100%', marginTop: '10px', backgroundColor: '#fff', color: 'black' }} className="btn btn-secondary ">Cancel</button>
+                                        <button onClick={() => props.history.push('/')} style={{ width: '100%', marginTop: '10px', backgroundColor: '#fff', color: 'black' }} className="btn btn-secondary ">Cancel</button>
                                     </form>
                                 </div>
                             </div>
