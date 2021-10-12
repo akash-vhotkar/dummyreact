@@ -14,7 +14,7 @@ import Fullrevenue from "./pages/Fullrevenue";
 import ResetPassword from "./pages/ResetPassword";
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPasswordLoginPage from './pages/ResetPasswordLoginPage/ResetPasswordLoginPage';
-// import Profile from './pages/Profile';
+import Profile from './pages/Profile';
 // import { useSelector, useDispatch } from "react-redux";
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/reset-password" component={ResetPassword} />
         <PrivateRoute exact path="/addhow" component={Addhow} />
-        {/* <PrivateRoute exact path="/profile" component={Profile} /> */}
+        <PrivateRoute exact path="/profile" component={Profile} />
         <PrivateRoute exact path="/viewhow" component={Viewhow} />
         <PrivateRoute exact path="/viewdonner" component={Alldonner} />
         <PrivateRoute exact path="/viewrevnue" component={Viewrevnue} />

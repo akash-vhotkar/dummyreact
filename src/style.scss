@@ -318,3 +318,10 @@ $black: #000;
     background-color: #4B49AC;
     cursor: pointer;
 }
+
+.profile-table > .table > thead > tr > td,
+.profile-table >.table > thead > tr > th {
+  padding: 10px;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+}

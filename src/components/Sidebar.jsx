@@ -36,11 +36,11 @@ function Sidebar(props) {
 
   const logout = () => {
     localStorage.removeItem('jwt');
+    localStorage.removeItem('user');
     dispatch({ type: LOG_OUT });
   }
 
   const setExpand = (key) => {
-    console.log("888888888888888888", key)
     if (key === 'Logout') {
       setLogoutClick(true)
     } else {

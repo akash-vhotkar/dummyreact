@@ -79,7 +79,7 @@ class ProfileMenu extends React.Component {
                             open={open}
                             onClose={this.handleClose}
                         >
-                            <MenuItem title="Coming Soon" onClick={this.handleClose}>
+                            <MenuItem title="Coming Soon" onClick={() => { this.props.history.push('/profile'); this.handleClose() }}>
                                 Profile
                             </MenuItem>
                             <MenuItem onClick={() => { this.props.history.push('/reset-password'); this.handleClose() }}>

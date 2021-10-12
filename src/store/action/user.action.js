@@ -1,6 +1,19 @@
 import { toast } from "react-toastify";
 import axiosinstance from "../../config/axios"
 
+export const updateProfile = (formData) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axiosinstance.put('/hp/', formData)
+            toast.success("Profile updated successfully!");
+            return data.success;
+        } catch (error) {
+            toast.error((error.response.data && error.response.data.error && error.response.data.error.message) || "Something went wrong");
+        }
+
+    }
+}
+
 export const ResetUserPassword = (formData) => {
     return async (dispatch) => {
         try {
