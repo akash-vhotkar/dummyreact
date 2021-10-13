@@ -7,9 +7,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import PrivateRoute from './config/PrivateRoute'
 import Addhow from "./pages/Addhow";
 import Viewhow from "./pages/Viewhow";
-import Alldonner from "./pages/Alldonner";
+import Alldonor from "./pages/Alldonor";
 import Viewrevnue from "./pages/Viewrevnue";
-import DonnerRevenue from "./pages/DonnerRevenue";
+import DonorRevenue from "./pages/DonorRevenue";
 import Fullrevenue from "./pages/Fullrevenue";
 import ResetPassword from "./pages/ResetPassword";
 import ForgotPassword from './pages/ForgotPassword';
@@ -32,9 +32,9 @@ function App() {
         <PrivateRoute exact path="/addhow" component={Addhow} />
         <PrivateRoute exact path="/profile" component={Profile} />
         <PrivateRoute exact path="/viewhow" component={Viewhow} />
-        <PrivateRoute exact path="/viewdonner" component={Alldonner} />
+        <PrivateRoute exact path="/viewdonor" component={Alldonor} />
         <PrivateRoute exact path="/viewrevnue" component={Viewrevnue} />
-        <PrivateRoute exact path="/donnerrevnue" component={DonnerRevenue} />
+        <PrivateRoute exact path="/donorrevnue" component={DonorRevenue} />
         <PrivateRoute exact path="/fullrevennue" component={Fullrevenue} />
 
 

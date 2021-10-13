@@ -14,8 +14,8 @@ function Sidebar(props) {
   useEffect(() => {
     if (!expand) {
       switch (props.location.pathname) {
-        case '/viewdonner':
-        case '/donnerrevnue':
+        case '/viewdonorr':
+        case '/donorrevnue':
           dispatch({ type: 'SET_EXPAND', expand: 'Donors' })
           break;
         case '/viewhow':
@@ -52,7 +52,7 @@ function Sidebar(props) {
     { name: "Dashboard", to: "/dashboard", icon: "icon-grid menu-icon", subMenu: [] },
     // { name: "Changepassword", to: "/changepassword", icon: "icon-grid menu-icon", subMenu: [] },
     { name: "Holy House", to: "/#", icon: "icon-layout menu-icon", subMenu: [{ name: "All Holyhouse", to: "/viewhow" }, { name: "Add new", to: "/addhow" }, { name: "View Revnue", to: "/viewrevnue" }] },
-    { name: "Donors", to: "/#", icon: "icon-columns menu-icon", subMenu: [{ name: "All Donors", to: "/viewdonner" }, { name: "Donors revennu", to: "/donnerrevnue" }] },
+    { name: "Donors", to: "/#", icon: "icon-columns menu-icon", subMenu: [{ name: "All Donors", to: "/viewdonor" }, { name: "Donors revenue", to: "/donorrevnue" }] },
     { name: "Payment Setting", to: "/#", icon: "icon-bar-graph menu-icon", subMenu: [{ name: "Stripe", to: "/c" }, { name: "Pled", to: "/c" }] },
     { name: "Revenu Section", to: "/#", icon: "icon-grid-2 menu-icon", subMenu: [{ name: "Full Revenue", to: "/fullrevennue" }] },
     { name: "Logout", to: "void(0)", icon: "icon-grid-2 menu-icon", subMenu: [] },

@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ConfirmationModal from '../container/ConfirmationModal/ConfirmationModal'
 import CustomPagination from '../components/CustomPagination/CustomPagination';
 
-export default function Alldonner() {
+export default function Alldonor() {
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
     const [currentRow, setCurrentRow] = useState({});
@@ -24,7 +24,7 @@ export default function Alldonner() {
         text: 'User',
         formatter: (cellContent, row) => {
             return (
-                <img src={row.image} alt="ini" />
+                <img src={`https://holypenniesapi.herokuapp.com/images/${row.image}`} alt="ini" />
             )
         }
     }, {
@@ -76,7 +76,7 @@ export default function Alldonner() {
                         <div className="col-lg-12 grid-margin stretch-card">
                             <div className="card">
                                 <div className="card-body">
-                                    <h4 className="card-title">View Donner </h4>
+                                    <h4 className="card-title">View Donor </h4>
                                     {data && data.rows && data.rows.length ?
                                         <>
                                             <CustomTable
