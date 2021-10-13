@@ -16,10 +16,10 @@ export default function Sidebar() {
   const [menuData, setMenuData] = useState([
     { name: "Dashboard", to: "/dashboard", icon: "icon-grid menu-icon", subMenu: [] },
     // { name: "Changepassword", to: "/changepassword", icon: "icon-grid menu-icon", subMenu: [] },
-    { name: "Holy House", to: "/content", icon: "icon-layout menu-icon", subMenu: [{ name: "All Holyhouse", to: "/viewhow" }, { name: "Add new", to: "/addhow" }, { name: "View Revnue", to: "/viewrevnue" }] },
-    { name: "Donors", to: "/content", icon: "icon-columns menu-icon", subMenu: [{ name: "All Donors", to: "/viewdonner" }, { name: "Donors revennu", to: "/c" }] },
-    { name: "Payment Setting", to: "/content", icon: "icon-bar-graph menu-icon", subMenu: [{ name: "Stripe", to: "/c" }, { name: "Pled", to: "/c" }] },
-    { name: "Revenu Section", to: "/content", icon: "icon-grid-2 menu-icon", subMenu: [{ name: "Full Revenue", to: "/c" }] },
+    { name: "Holy House", to: "/#", icon: "icon-layout menu-icon", subMenu: [{ name: "All Holyhouse", to: "/viewhow" }, { name: "Add new", to: "/addhow" }, { name: "View Revnue", to: "/viewrevnue" }] },
+    { name: "Donors", to: "/#", icon: "icon-columns menu-icon", subMenu: [{ name: "All Donors", to: "/viewdonner" }, { name: "Donors revennu", to: "/donnerrevnue" }] },
+    { name: "Payment Setting", to: "/#", icon: "icon-bar-graph menu-icon", subMenu: [{ name: "Stripe", to: "/c" }, { name: "Pled", to: "/c" }] },
+    { name: "Revenu Section", to: "/#", icon: "icon-grid-2 menu-icon", subMenu: [{ name: "Full Revenue", to: "/fullrevennue" }] },
     { name: "Logout", to: "void(0)", onClick: logout, icon: "icon-grid-2 menu-icon", subMenu: [] },
   ])
 
@@ -27,7 +27,6 @@ export default function Sidebar() {
     <div>
       <nav className={isNav ? "sidebar sidebar-offcanvas active" : 'sidebar sidebar-offcanvas'} id="sidebar">
         <ul className="nav">
-
           {
             menuData.map((ele, ind) => (
               <>

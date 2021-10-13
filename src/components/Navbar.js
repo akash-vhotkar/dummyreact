@@ -10,9 +10,11 @@ import { Link } from 'react-router-dom';
 
 export default function Navbar() {
   const [progress, setProgressBar] = useState(50);
+  
   setTimeout(() => {
     setProgressBar(100)
-  }, 500);
+  }, 500);  
+  
   const dispatch = useDispatch();
 
   const switchNav = () => {
@@ -124,3 +126,5 @@ export default function Navbar() {
     </>
   )
 }
+
+

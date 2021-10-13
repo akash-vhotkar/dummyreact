@@ -12,7 +12,7 @@ export default function Alldonner() {
                         <div className="col-lg-12 grid-margin stretch-card">
                             <div className="card">
                                 <div className="card-body">
-                                    <h4 className="card-title">Org Sample Table list </h4>
+                                    <h4 className="card-title">View Donner </h4>
                                     <Table>
                                         <thead>
                                             <tr>

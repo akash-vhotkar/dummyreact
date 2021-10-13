@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '../container/Layout'
 
-export default function Viewrevnue() {
+export default function Fullrevenue() {
     return (
         <React.Fragment>
             <Layout>
