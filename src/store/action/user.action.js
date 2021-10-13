@@ -4,7 +4,7 @@ import axiosinstance from "../../config/axios"
 export const updateProfile = (formData) => {
     return async (dispatch) => {
         try {
-            const { data } = await axiosinstance.put('/hp/', formData)
+            const { data } = await axiosinstance.put('/hp/profile', formData)
             toast.success("Profile updated successfully!");
             return data.success;
         } catch (error) {
