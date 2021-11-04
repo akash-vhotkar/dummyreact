@@ -1,63 +1,54 @@
 import React, { useState, useEffect } from 'react'
 import Layout from '../container/Layout'
-import Table from '../container/Table';
 import face from '../assets/images/face1.jpg';
-import { useDispatch, useSelector } from 'react-redux';
-import { ViewHow, deleteOrg } from '../store/action/hollyhouse.action';
-import moment from 'moment';
 import CustomTable from '../container/CustomTable';
+import { getDonor, deleteDonor } from '../store/action/donor.action';
+import { useDispatch, useSelector } from 'react-redux';
 import ConfirmationModal from '../container/ConfirmationModal/ConfirmationModal'
 import CustomPagination from '../components/CustomPagination/CustomPagination';
 
-export default function Viewhow() {
-    const [Data, setData] = useState({});
+export default function Alldonor() {
+    const dispatch = useDispatch();
+    const [data, setData] = useState([]);
     const [currentRow, setCurrentRow] = useState({});
     const [page, setPage] = useState(1);
-    const loader = useSelector(state => state.HollyHouseReducer.loader)
-    const dispatch = useDispatch();
+    const loader = useSelector(state => state.DonorReducer.loader)
 
     useEffect(async () => {
-        const data = await dispatch(ViewHow(1));
+        const data = await dispatch(getDonor(1));
         setData(data);
     }, [])
 
     let columns = [{
-        dataField: 'name',
-        text: 'Name',
-        searchable: true,
+        dataField: 'image',
+        text: 'User',
         formatter: (cellContent, row) => {
             return (
-                <div className="table-action">
-                    <img style={{ marginRight: '5px' }} src={face} alt="ini" />{row.name}
-                </div>
+                <img src={`https://holypenniesapi.herokuapp.com/images/${row.image}`} alt="ini" />
             )
         }
     }, {
+        dataField: 'first_name',
+        text: 'First Name'
+    }, {
+        dataField: 'last_name',
+        text: 'Last Name'
+    }, {
         dataField: 'email',
         text: 'Email',
-        searchable: true
-    }, {
-        dataField: 'status',
-        text: 'Acc Status',
-        searchable: true,
         formatter: (cellContent, row) => {
-            return (row.isactive ? "Active" : "Deactive")
+            return (
+                <div className="table-action">{row.email}</div>
+            )
         }
     }, {
-        dataField: 'amount',
-        text: 'Amount Approved',
-        searchable: true,
-        formatter: (cellContent, row) => {
-            return row.status
-        }
+        dataField: 'mobile',
+        text: 'Contact Number'
     }, {
-        dataField: 'date',
-        text: 'Opening Date',
-        searchable: true,
-        formatter: (cellContent, row) => {
-            return moment(row.createdAt).fromNow()
-        }
-    }, {
+        dataField: 'isactive',
+        text: 'Active'
+    },
+    {
         dataField: 'action',
         isDummyField: true,
         text: 'Action',
@@ -67,16 +58,14 @@ export default function Viewhow() {
             );
         }
     }]
-
     const doneClickHandler = async () => {
-        const data = await dispatch(deleteOrg(currentRow.id))
+        const data = await dispatch(deleteDonor(currentRow.id))
         if (data) {
             setCurrentRow({})
         }
     }
-
     const paginationHandler = async (page) => {
-        const data = await dispatch(ViewHow(page));
+        const data = await dispatch(getDonor(page));
         setData(data);
     }
     return (
@@ -87,17 +76,16 @@ export default function Viewhow() {
                         <div className="col-lg-12 grid-margin stretch-card">
                             <div className="card">
                                 <div className="card-body">
-                                    <h4 className="card-title">View Organization list </h4>
-                                    {(Data && Data.rows && Data.rows.length) ?
+                                    <h4 className="card-title">View Donor </h4>
+                                    {data && data.rows && data.rows.length ?
                                         <>
                                             <CustomTable
                                                 columns={columns}
                                                 noDataIndication='No data found'
-                                                tableData={Data.rows}
-                                                loader={loader}
+                                                tableData={data.rows}
                                             />
                                             <CustomPagination
-                                                totalCount={Data.count}
+                                                totalCount={data.count}
                                                 page={page}
                                                 setPage={setPage}
                                                 loader={loader}
@@ -114,10 +102,10 @@ export default function Viewhow() {
             {currentRow && currentRow.id ?
                 <ConfirmationModal
                     open={true}
-                    buttonText="delete"
                     doneClick={doneClickHandler}
-                    modalTitle={`Delete Organization`}
-                    message={`Are you sure you want to delete ${currentRow.org_name}?`}
+                    buttonText="Delete"
+                    modalTitle={`Delete User`}
+                    message={`Are you sure you want to delete ${currentRow.first_name} ${currentRow.last_name}?`}
                     handleClose={() => { setCurrentRow({}) }} /> : null
             }
         </React.Fragment>

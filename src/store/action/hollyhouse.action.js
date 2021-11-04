@@ -17,16 +17,45 @@ export const AddHow = (userData) => {
     }
 }
 
-export const ViewHow = () => {
+export const ViewHow = (page) => {
     return async (dispatch) => {
+        dispatch({ type: 'SET_LOADER', loader: true })
         try {
-            const {data} = await axiosinstance.get('/hp/hows');
+            const { data } = await axiosinstance.get(`/hp/hows?page=${page}&limit=10`);
+            dispatch({ type: 'SET_LOADER', loader: false })
             return data.data;
         } catch (error) {
-            
+
             toast.error("Something went wrong");
         }
 
     }
 }
 
+export const getHowCount = () => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axiosinstance.get('/hp/how-count');
+            return data.data;
+        } catch (error) {
+
+            toast.error("Something went wrong");
+        }
+
+    }
+}
+
+export const deleteOrg = (id) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axiosinstance.delete(`/hp/how/${id}`);
+            toast.success("Organization deleted successfully");
+            dispatch(ViewHow())
+            return data.data;
+
+        } catch (error) {
+            toast.error("Something went wrong");
+        }
+
+    }
+}

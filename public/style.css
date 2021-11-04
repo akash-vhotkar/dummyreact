@@ -28645,7 +28645,8 @@ div.tagsinput span.tag a {
   margin-top: 0;
   list-style: none;
   padding: 0.25rem 0 0 3.07rem;
-  background: #4B49AC;
+  /* background: #4B49AC; */
+  color:#6C7383;
   padding-bottom: 12px;
 }
 
@@ -28664,7 +28665,7 @@ div.tagsinput span.tag a {
 }
 
 .sidebar .nav.sub-menu .nav-item .nav-link {
-  color: #fff;
+  color:#6C7383;
   padding: 0.7rem 1rem;
   position: relative;
   font-size: 0.875rem;
@@ -28673,8 +28674,31 @@ div.tagsinput span.tag a {
   border-top: 0;
 }
 
+.sidebar .nav .nav-item .nav-link.main-selected{
+  color: #ffffff;
+  background: #4B49AC;
+}
+
+.sidebar .nav .nav-item .nav-link.main-selected .icon-layout{
+  color: #ffffff;
+}
+
+.sidebar .nav .nav-item .nav-link.main-selected .menu-icon{
+  color: #ffffff;
+}
+
+.sidebar .nav .nav-item .nav-link.main-selected .menu-arrow{
+  color: #ffffff;
+}
+
+.sidebar .nav.sub-menu .nav-item .nav-link.selected{
+  color:#4B49AC;
+  font-weight:700;
+}
+
 .sidebar .nav.sub-menu .nav-item .nav-link:hover {
   color: #ffffff;
+  background: #4B49AC;
 }
 
 .sidebar .nav.sub-menu .nav-item .nav-link.active {
@@ -30585,6 +30609,25 @@ div.tagsinput span.tag a {
   right: auto;
   left: 30px;
 }
+
+.react-bootstrap-table{
+  width: 100%;
+  overflow-x: auto;
+}
+
+.react-bootstrap-table table{
+  table-layout: unset !important;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  padding: 13px 10px;
+  vertical-align: middle; }
+
 
 @media (max-width: 991px) {
   #settings-trigger {

@@ -40,6 +40,7 @@ export default function Addhow() {
         org_name: "",
         org_desc: ""
       })
+      setFile(null)
       setLoading(false);
     } else {
       setLoading(false);
@@ -112,7 +113,7 @@ export default function Addhow() {
 
                       <div className="form-group">
                         <label>Upload Organization Logo (jpg,img,png,jpeg)</label>
-                        <input type="file" onChange={handelImage} className="form-control" name="file" placeholder="Upload Organization logo" />
+                        <input type="file" onChange={handelImage} className="form-control" name="file" placeholder="Upload Organization logo"  />
                       </div>
                     </section>
                     <button className="btn btn-primary btn-block">Create</button>

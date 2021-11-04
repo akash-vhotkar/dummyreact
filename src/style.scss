@@ -91,6 +91,7 @@ $black: #000;
 }
 
 /*  TOGGLER  */
+
 .MuiPaper-root {
   background-color: $primary-color !important;
   width: 250px;
@@ -115,6 +116,12 @@ $black: #000;
       font-weight: 500;
       text-transform: capitalize;
     }
+  }
+}
+
+.profile-menu-dropdown{
+  .MuiPaper-root{
+    background-color: #fff !important;
   }
 }
 
@@ -292,4 +299,29 @@ $black: #000;
       color: $black;
     }
   }
+}
+
+.pagination-btn{
+  user-select: none;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    fill: currentcolor;
+    flex-shrink: 0;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    font-size: 1.5rem;
+    margin: 4px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    box-sizing: content-box;
+    color: rgb(255, 255, 255);
+    background-color: #4B49AC;
+    cursor: pointer;
+}
+
+.profile-table > .table > thead > tr > td,
+.profile-table >.table > thead > tr > th {
+  padding: 10px;
+  vertical-align: middle;
+  border: 1px solid #ddd;
 }

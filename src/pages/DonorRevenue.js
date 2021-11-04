@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '../container/Layout'
 
-export default function DonnerRevenue() {
+export default function DonorRevenue() {
     return (
         <React.Fragment>
             <Layout>
@@ -10,7 +10,7 @@ export default function DonnerRevenue() {
                         <div className="col-lg-12 grid-margin stretch-card">
                             <div className="card">
                                 <div className="card-body">
-                                    <h4 className="card-title">View Donner Revenue </h4>
+                                    <h4 className="card-title">View Donor Revenue </h4>
                                 </div>
                             </div>
                         </div>

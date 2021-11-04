@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
 import { login } from "../store/action/auth.action";
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CLEAR_LOGIN_ERRORS } from "../store/constant";
 import HolyPennies from '../assets/images/HolyPennies-Logo.png';
 
@@ -18,8 +18,8 @@ function Login(props) {
 
   useEffect(() => {
     if (loginerror.length > 0) {
-      
-      loginerror.map(function(loginer){
+
+      loginerror.map(function (loginer) {
         toast.error(loginer.message);
         dispatch({ type: CLEAR_LOGIN_ERRORS, payload: [] });
       })
@@ -62,11 +62,11 @@ function Login(props) {
             <div className="row w-100 mx-0">
               <div className="col-lg-4 mx-auto">
                 <div className="auth-form-light text-left py-5 px-4 px-sm-5">
-                  <div className="brand-logo">
+                  <div style={{ textAlign: 'center' }} className="brand-logo">
                     <img src={HolyPennies} alt="logo" />
                   </div>
-                  <h4>Hello! let's get started</h4>
-                  <h6 className="font-weight-light">Sign in to continue.</h6>
+                  <h4 style={{ textAlign: 'center' }}>Hello! let's get started</h4>
+                  <h6 style={{ textAlign: 'center' }} className="font-weight-light">Sign in to continue.</h6>
                   <form onSubmit={onSubmit} className="pt-3">
                     <div className="form-group">
                       <input
@@ -111,7 +111,7 @@ function Login(props) {
                           Keep me signed in
                         </label>
                       </div>
-                      <Link to="/" className="auth-link text-black"
+                      <Link to="/forgot-password" className="auth-link text-black"
                       >Forgot password?</Link>
                     </div>
 

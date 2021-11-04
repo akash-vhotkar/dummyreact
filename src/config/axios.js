@@ -3,6 +3,7 @@ import { API_URL } from './Env';
 import store from '../store';
 import { LOG_OUT, SET_TOKEN } from '../store/constant';
 const prevTOken = localStorage.getItem('jwt');
+
 const axiosinstance = axios.create({
     baseURL: API_URL,
 });
